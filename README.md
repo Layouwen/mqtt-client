@@ -1,4 +1,4 @@
-# MQTT CLIENT
+# Mqtt Client
 
 MQTT client wrapper that supports subscription and message handling.
 
@@ -34,7 +34,7 @@ export const mqttTopicInfoList = [
 
 export async function mqttInit() {
   const mqttClient = new MqttClient({
-    brokerUrl: "mqtt://localhost:1883",
+    brokerUrl: process.env.MQTT_BROKER_URL || "mqtt://localhost:1883",
     opts: {
       protocolVersion: 5,
       clientId: "mqtt-client",
@@ -45,6 +45,30 @@ export async function mqttInit() {
   mqttClient.on("connect", () => {
     console.log("mqtt connect success");
     mqttClient.onSubscribes(mqttTopicInfoList);
+
+    mqttClient.onSubscribe({
+      topic: "/+/station/pub/tag/event2",
+      opts: {
+        qos: 2,
+        retain: false,
+      },
+      handle: (topic) => {
+        console.log("mqtt subscribe success one", topic);
+      },
+    });
+
+    mqttClient.onSubscribe({
+      topic: "/+/station/pub/tag/event2",
+      opts: {
+        qos: 2,
+        retain: false,
+      },
+      handle: (topic, data) => {
+        console.log("mqtt subscribe success two", topic, data);
+      },
+    });
+
+    mqttClient.publish("/project/station/pub/tag/event2", { event: "test" });
   });
 
   mqttClient.on("error", (err) => {
@@ -67,7 +91,7 @@ mqttInit();
 
 ## Demo
 
-[mqtt-client-ts](./demo/index.ts)
+[mqtt-client-demo](./demo/index.ts)
 
 ```bash
 npm install
