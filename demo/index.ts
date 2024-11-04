@@ -1,4 +1,7 @@
 import { MqttClient, MqttTopicInfo } from "../src";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const mqttTopicInfoList = [
   {
@@ -16,7 +19,7 @@ export const mqttTopicInfoList = [
 
 export async function mqttInit() {
   const mqttClient = new MqttClient({
-    brokerUrl: "mqtt://localhost:1883",
+    brokerUrl: process.env.MQTT_BROKER_URL || "mqtt://localhost:1883",
     opts: {
       protocolVersion: 5,
       clientId: "mqtt-client",
