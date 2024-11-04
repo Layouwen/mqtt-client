@@ -27,6 +27,19 @@ export async function mqttInit() {
   mqttClient.on("connect", () => {
     console.log("mqtt connect success");
     mqttClient.onSubscribes(mqttTopicInfoList);
+
+    mqttClient.onSubscribe({
+      topic: "/+/station/pub/tag/event2",
+      opts: {
+        qos: 2,
+        retain: false,
+      },
+      handle: (topic) => {
+        console.log("mqtt subscribe success", topic);
+      },
+    });
+
+    mqttClient.publish("/project/station/pub/tag/event2", { event: "test" });
   });
 
   mqttClient.on("error", (err) => {

@@ -74,7 +74,7 @@ export class MqttClient extends EventEmitter {
 
     if (!callbackList) {
       for (let [key, value] of this.topicSubscribeCallbackListMap.entries()) {
-        const regex = new RegExp(key.replaceAll(/\+/g, ".*"));
+        const regex = new RegExp(`^${key.replace(/\+/g, "[^/]+")}$`);
         if (regex.test(topic)) {
           callbackList = value;
           break;
@@ -116,10 +116,18 @@ export class MqttClient extends EventEmitter {
       this.onSubscribe(mqttTopicInfo)
     );
   }
+
+  public publish(topic: string, message: Record<string, any> | string) {
+    if (typeof message === "object") {
+      message = JSON.stringify(message);
+    }
+
+    this.client.publish(topic, message);
+  }
 }
 
 export interface MqttTopicInfo {
-  key: string;
+  key?: string;
   topic: string;
   opts: {
     qos: 2;
