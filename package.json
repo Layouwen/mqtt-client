@@ -1,0 +1,41 @@
+{
+  "name": "@avanlan/mqtt-client",
+  "version": "0.0.1",
+  "description": "MQTT client for Node.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "dev": "nodemon demo/index.ts",
+    "build": "rimraf dist && tsc"
+  },
+  "files": [
+    "dist/src/**/*",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "mqtt",
+    "mqtt-client"
+  ],
+  "author": {
+    "name": "Avan",
+    "email": "layouwen@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Layouwen/mqtt-client.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "mqtt": "^5.10.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
