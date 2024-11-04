@@ -7,13 +7,13 @@ MQTT client wrapper that supports subscription and message handling.
 
 [![NPM](https://nodei.co/npm/@avanlan/mqtt-client.png?downloads=true&downloadRank=true)](https://nodei.co/npm/@avanlan/mqtt-client/)
 
-## install
+## Install
 
 ```bash
 npm install @avanlan/mqtt-client
 ```
 
-## usage
+## Usage
 
 ```typescript
 import { MqttClient, MqttTopicInfo } from "@avanlan/mqtt-client";
