@@ -18,6 +18,20 @@ npm install @avanlan/mqtt-client
 ```typescript
 import { MqttClient, MqttTopicInfo } from "@avanlan/mqtt-client";
 
+export const mqttTopicInfoList = [
+  {
+    key: "event",
+    topic: `/+/station/pub/tag/event`,
+    opts: {
+      qos: 2,
+      retain: false,
+    },
+    handle: (topic: string, data: any) => {
+      console.log("handle data", topic, data);
+    },
+  },
+] as MqttTopicInfo[];
+
 export async function mqttInit() {
   const mqttClient = new MqttClient({
     brokerUrl: "mqtt://localhost:1883",
