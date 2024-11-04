@@ -2,6 +2,11 @@
 
 MQTT client wrapper that supports subscription and message handling.
 
+[![Version npm](https://img.shields.io/npm/v/@avanlan/mqtt-client.svg?style=flat-square)](https://www.npmjs.com/package/@avanlan/mqtt-client)
+[![NPM Downloads](https://img.shields.io/npm/dw/%40avanlan%2Fmqtt-client)](https://www.npmjs.com/package/@avanlan/mqtt-client)
+
+[![NPM](https://nodei.co/npm/@avanlan/mqtt-client.png?downloads=true&downloadRank=true)](https://nodei.co/npm/@avanlan/mqtt-client/)
+
 ## install
 
 ```bash
