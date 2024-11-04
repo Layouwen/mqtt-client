@@ -70,7 +70,17 @@ export class MqttClient extends EventEmitter {
   private onMessageCallback(topic: string, message: Buffer) {
     this.emit("messageReceived", topic, message.toString());
 
-    const callbackList = this.topicSubscribeCallbackListMap.get(topic);
+    let callbackList = this.topicSubscribeCallbackListMap.get(topic);
+
+    if (!callbackList) {
+      for (let [key, value] of this.topicSubscribeCallbackListMap.entries()) {
+        const regex = new RegExp(key.replaceAll(/\+/g, ".*"));
+        if (regex.test(topic)) {
+          callbackList = value;
+          break;
+        }
+      }
+    }
 
     if (!callbackList) return;
 
