@@ -102,7 +102,7 @@ export class MqttClient extends EventEmitter {
 
     const handleList = this.topicSubscribeCallbackListMap.get(topic) || [];
 
-    if (!handleList.includes(handle)) {
+    if (!this.topicSubscribeCallbackListMap.has(topic)) {
       this.client.subscribe(topic, opts);
     }
 

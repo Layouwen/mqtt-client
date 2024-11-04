@@ -38,7 +38,18 @@ export async function mqttInit() {
         retain: false,
       },
       handle: (topic) => {
-        console.log("mqtt subscribe success", topic);
+        console.log("mqtt subscribe success one", topic);
+      },
+    });
+
+    mqttClient.onSubscribe({
+      topic: "/+/station/pub/tag/event2",
+      opts: {
+        qos: 2,
+        retain: false,
+      },
+      handle: (topic, data) => {
+        console.log("mqtt subscribe success two", topic, data);
       },
     });
 
